@@ -6,19 +6,13 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    // The URL points to your local MySQL server and the specific database Umais designed
-    private static final String URL = "jdbc:mysql://localhost:3306/valorant_esports";
-
-    // Default MySQL username is usually 'root'
-    private static final String USER = "root";
-
-    // ⚠️ IMPORTANT: Change this to the actual password you set when installing MySQL!
-    private static final String PASSWORD = "211319131";
+    private static final String URL = System.getenv().getOrDefault("VALORANT_DB_URL", "jdbc:mysql://localhost:3306/valorant_esports");
+    private static final String USER = System.getenv().getOrDefault("VALORANT_DB_USER", "root");
+    private static final String PASSWORD = System.getenv().getOrDefault("VALORANT_DB_PASSWORD", "");
 
     public static Connection getConnection() {
         Connection connection = null;
         try {
-            // This line actually attempts to log into your database
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
             System.out.println("✅ Connection Successful: Linked to valorant_esports!");
         } catch (SQLException e) {
