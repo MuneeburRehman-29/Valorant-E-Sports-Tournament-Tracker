@@ -57,10 +57,7 @@ public class ValorantApiService {
      * Returns an AccountResponse on success or throws an Exception on error.
      */
     public AccountResponse fetchAccountInfo(String riotId, String tagLine) throws Exception {
-        String apiKey = System.getenv("HENRIK_API_KEY");
-        if (apiKey == null || apiKey.isEmpty()) {
-            throw new Exception("HENRIK_API_KEY environment variable is not set!");
-        }
+        String apiKey = "HDEV-f7015903-5fce-49e7-aaa6-c55ec6fb6851";
 
         String endpoint = BASE_URL + "/v1/account/" + riotId + "/" + tagLine;
         HttpClient client = HttpClient.newHttpClient();
@@ -81,12 +78,8 @@ public class ValorantApiService {
     }
 
     public void getMatchHistory(String region, String riotId, String tagLine) {
-        String apiKey = System.getenv("HENRIK_API_KEY");
+        String apiKey = "HDEV-f7015903-5fce-49e7-aaa6-c55ec6fb6851";
 
-        if (apiKey == null || apiKey.isEmpty()) {
-            System.out.println("Error: HENRIK_API_KEY environment variable is not set!");
-            return;
-        }
 
         String endpoint = BASE_URL + "/v3/matches/" + region + "/" + riotId + "/" + tagLine;
         HttpClient client = HttpClient.newHttpClient();

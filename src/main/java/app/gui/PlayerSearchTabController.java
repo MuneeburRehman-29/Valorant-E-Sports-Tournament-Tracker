@@ -116,10 +116,7 @@ public class PlayerSearchTabController {
 
                 // 2. Fetch match history using MatchResponse
                 List<MatchRow> rows = new ArrayList<>();
-                String apiKey = System.getenv("HENRIK_API_KEY");
-                if (apiKey == null || apiKey.isEmpty()) {
-                    throw new Exception("HENRIK_API_KEY not set. Set env var or hardcode for testing.");
-                }
+                String apiKey = "HDEV-f7015903-5fce-49e7-aaa6-c55ec6fb6851";
 
                 String url = "https://api.henrikdev.xyz/valorant/v3/matches/"
                         + region + "/" + name + "/" + tag;
