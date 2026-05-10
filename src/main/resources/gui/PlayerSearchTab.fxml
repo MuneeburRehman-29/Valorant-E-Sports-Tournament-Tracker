@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21.0.2"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="app.gui.PlayerSearchTabController"
+      styleClass="tab-content"
+      spacing="20">
+    <padding><Insets top="28" right="28" bottom="28" left="28"/></padding>
+
+    <!-- Section Header -->
+    <VBox spacing="4">
+        <Label text="PLAYER SEARCH" styleClass="section-title"/>
+        <Label text="Fetch live stats from Henrik API · Auto-save to MySQL" styleClass="section-sub"/>
+    </VBox>
+
+    <Separator styleClass="divider"/>
+
+    <!-- Search Row -->
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <VBox spacing="6" HBox.hgrow="ALWAYS">
+            <Label text="RIOT ID" styleClass="field-label"/>
+            <TextField fx:id="riotIdField" promptText="e.g.  TenZ" styleClass="val-text-field" maxWidth="320"/>
+        </VBox>
+        <VBox spacing="6">
+            <Label text="TAG" styleClass="field-label"/>
+            <TextField fx:id="tagLineField" promptText="e.g.  SEN" styleClass="val-text-field" prefWidth="120"/>
+        </VBox>
+        <VBox spacing="6">
+            <Label text="REGION" styleClass="field-label"/>
+            <ComboBox fx:id="regionCombo" styleClass="val-combo" prefWidth="110"/>
+        </VBox>
+        <VBox spacing="6" alignment="BOTTOM_LEFT">
+            <Label text=" " styleClass="field-label"/>
+            <Button fx:id="searchBtn" text="FETCH STATS" onAction="#handleSearch" styleClass="btn-primary"/>
+        </VBox>
+    </HBox>
+
+    <!-- API Match Results Table -->
+    <VBox spacing="8" VBox.vgrow="ALWAYS">
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <Label text="RECENT MATCHES" styleClass="table-section-label"/>
+            <Label fx:id="apiStatusLabel" text="" styleClass="status-info"/>
+        </HBox>
+
+        <TableView fx:id="matchHistoryTable" styleClass="val-table" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colMap"     text="MAP"     prefWidth="130"/>
+                <TableColumn fx:id="colResult"  text="RESULT"  prefWidth="80"/>
+                <TableColumn fx:id="colAgent"   text="AGENT"   prefWidth="120"/>
+                <TableColumn fx:id="colKills"   text="K"       prefWidth="60"/>
+                <TableColumn fx:id="colDeaths"  text="D"       prefWidth="60"/>
+                <TableColumn fx:id="colAssists" text="A"       prefWidth="60"/>
+                <TableColumn fx:id="colAcs"     text="ACS"     prefWidth="80"/>
+            </columns>
+            <placeholder>
+                <Label text="Enter a Riot ID above and click FETCH STATS" styleClass="table-placeholder"/>
+            </placeholder>
+        </TableView>
+    </VBox>
+
+    <!-- Bottom row: save button + DB player list -->
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <Button fx:id="saveToDbBtn" text="💾  SAVE PLAYER TO DB" onAction="#handleSavePlayer" styleClass="btn-secondary" disable="true"/>
+        <Button fx:id="viewDbBtn"   text="🗄  VIEW DB PLAYERS"   onAction="#handleViewDb"    styleClass="btn-ghost"/>
+        <Label fx:id="saveStatusLabel" text="" styleClass="status-info"/>
+    </HBox>
+
+    <!-- DB Players mini-table (shown when VIEW DB is clicked) -->
+    <TableView fx:id="dbPlayersTable" styleClass="val-table" maxHeight="180" managed="false" visible="false">
+        <columns>
+            <TableColumn fx:id="colDbId"     text="ID"      prefWidth="60"/>
+            <TableColumn fx:id="colDbRiotId" text="RIOT ID" prefWidth="200"/>
+            <TableColumn fx:id="colDbTeam"   text="TEAM ID" prefWidth="100"/>
+            <TableColumn fx:id="colDbActive" text="STATUS"  prefWidth="100"/>
+        </columns>
+        <placeholder>
+            <Label text="No players saved yet" styleClass="table-placeholder"/>
+        </placeholder>
+    </TableView>
+
+</VBox>

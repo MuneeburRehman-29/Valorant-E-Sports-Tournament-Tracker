@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21.0.2"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="app.gui.MatchLogTabController"
+      styleClass="tab-content"
+      spacing="20">
+    <padding><Insets top="28" right="28" bottom="28" left="28"/></padding>
+
+    <!-- Header row -->
+    <HBox alignment="CENTER_LEFT" spacing="0">
+        <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="MATCH LOG" styleClass="section-title"/>
+            <Label text="All recorded tournament matches · Click a row to see round details" styleClass="section-sub"/>
+        </VBox>
+        <Button fx:id="refreshMatchesBtn" text="↻  REFRESH" onAction="#handleRefresh" styleClass="btn-ghost"/>
+    </HBox>
+
+    <Separator styleClass="divider"/>
+
+    <!-- Stat cards row -->
+    <HBox spacing="16">
+        <VBox styleClass="stat-card" spacing="4" alignment="CENTER">
+            <Label fx:id="totalMatchesLabel" text="—" styleClass="stat-number"/>
+            <Label text="TOTAL MATCHES" styleClass="stat-label"/>
+        </VBox>
+        <VBox styleClass="stat-card" spacing="4" alignment="CENTER">
+            <Label fx:id="totalTournamentsLabel" text="—" styleClass="stat-number"/>
+            <Label text="TOURNAMENTS" styleClass="stat-label"/>
+        </VBox>
+        <VBox styleClass="stat-card" spacing="4" alignment="CENTER">
+            <Label fx:id="totalTeamsLabel" text="—" styleClass="stat-number"/>
+            <Label text="TEAMS" styleClass="stat-label"/>
+        </VBox>
+        <VBox styleClass="stat-card" spacing="4" alignment="CENTER">
+            <Label fx:id="totalPlayersLabel" text="—" styleClass="stat-number"/>
+            <Label text="PLAYERS" styleClass="stat-label"/>
+        </VBox>
+    </HBox>
+
+    <!-- Matches Table -->
+    <VBox spacing="8" VBox.vgrow="ALWAYS">
+        <Label text="ALL MATCHES" styleClass="table-section-label"/>
+        <TableView fx:id="matchTable" styleClass="val-table" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colMatchId"      text="#"           prefWidth="50"/>
+                <TableColumn fx:id="colTournament"   text="TOURNAMENT"  prefWidth="170"/>
+                <TableColumn fx:id="colStage"        text="STAGE"       prefWidth="100"/>
+                <TableColumn fx:id="colMatchMap"     text="MAP"         prefWidth="100"/>
+                <TableColumn fx:id="colTeamA"        text="TEAM A"      prefWidth="130"/>
+                <TableColumn fx:id="colTeamB"        text="TEAM B"      prefWidth="130"/>
+                <TableColumn fx:id="colWinner"       text="WINNER"      prefWidth="130"/>
+                <TableColumn fx:id="colMatchDate"    text="DATE"        prefWidth="140"/>
+            </columns>
+            <placeholder>
+                <Label text="No matches found in database" styleClass="table-placeholder"/>
+            </placeholder>
+        </TableView>
+    </VBox>
+
+    <!-- Round detail panel (shown when a match row is selected) -->
+    <VBox fx:id="roundDetailPane" spacing="8" managed="false" visible="false">
+        <Label fx:id="roundDetailTitle" text="ROUND BREAKDOWN — Match #?" styleClass="table-section-label"/>
+        <TableView fx:id="roundTable" styleClass="val-table" maxHeight="180">
+            <columns>
+                <TableColumn fx:id="colRoundNum"    text="ROUND"   prefWidth="80"/>
+                <TableColumn fx:id="colRoundWinner" text="WINNER"  prefWidth="140"/>
+                <TableColumn fx:id="colRoundSide"   text="SIDE"    prefWidth="110"/>
+                <TableColumn fx:id="colRoundType"   text="WIN TYPE" prefWidth="160"/>
+            </columns>
+            <placeholder>
+                <Label text="No rounds recorded for this match" styleClass="table-placeholder"/>
+            </placeholder>
+        </TableView>
+    </VBox>
+
+</VBox>

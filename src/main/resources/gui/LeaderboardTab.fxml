@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21.0.2"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="app.gui.LeaderboardTabController"
+      styleClass="tab-content"
+      spacing="20">
+    <padding><Insets top="28" right="28" bottom="28" left="28"/></padding>
+
+    <!-- Header row -->
+    <HBox alignment="CENTER_LEFT" spacing="0">
+        <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="LEADERBOARD" styleClass="section-title"/>
+            <Label text="Ranked by Avg Combat Score · Live from MySQL aggregates" styleClass="section-sub"/>
+        </VBox>
+        <Button fx:id="refreshLbBtn" text="↻  REFRESH" onAction="#handleRefresh" styleClass="btn-ghost"/>
+    </HBox>
+
+    <Separator styleClass="divider"/>
+
+    <!-- Top 3 podium cards -->
+    <HBox fx:id="podiumBox" spacing="16" alignment="CENTER">
+        <!-- Populated dynamically in controller -->
+    </HBox>
+
+    <!-- Leaderboard table -->
+    <VBox spacing="8" VBox.vgrow="ALWAYS">
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <Label text="FULL RANKINGS" styleClass="table-section-label"/>
+            <Label fx:id="lbStatusLabel" text="" styleClass="status-info"/>
+        </HBox>
+
+        <TableView fx:id="leaderboardTable" styleClass="val-table" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colRank"     text="RANK"    prefWidth="70"/>
+                <TableColumn fx:id="colLbPlayer" text="PLAYER"  prefWidth="200"/>
+                <TableColumn fx:id="colLbTeam"   text="TEAM"    prefWidth="160"/>
+                <TableColumn fx:id="colAvgAcs"   text="AVG ACS" prefWidth="110"/>
+                <TableColumn fx:id="colTotalK"   text="KILLS"   prefWidth="90"/>
+                <TableColumn fx:id="colTotalD"   text="DEATHS"  prefWidth="90"/>
+                <TableColumn fx:id="colTotalA"   text="ASSISTS" prefWidth="90"/>
+                <TableColumn fx:id="colKdRatio"  text="K/D"     prefWidth="90"/>
+            </columns>
+            <placeholder>
+                <Label text="No stats found · Record some matches to see rankings" styleClass="table-placeholder"/>
+            </placeholder>
+        </TableView>
+    </VBox>
+
+    <!-- Roster section -->
+    <VBox spacing="8">
+        <Label text="FULL ROSTER" styleClass="table-section-label"/>
+        <TableView fx:id="rosterTable" styleClass="val-table" maxHeight="200">
+            <columns>
+                <TableColumn fx:id="colRosterRiotId" text="RIOT ID"      prefWidth="200"/>
+                <TableColumn fx:id="colRosterTeam"   text="TEAM"         prefWidth="160"/>
+                <TableColumn fx:id="colRosterOrg"    text="ORGANIZATION" prefWidth="160"/>
+                <TableColumn fx:id="colRosterRegion" text="REGION"       prefWidth="100"/>
+                <TableColumn fx:id="colRosterStatus" text="STATUS"       prefWidth="100"/>
+            </columns>
+            <placeholder>
+                <Label text="No players found in database" styleClass="table-placeholder"/>
+            </placeholder>
+        </TableView>
+    </VBox>
+
+</VBox>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21.0.2"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="app.gui.MainController"
+      styleClass="root-container"
+      spacing="0">
+
+    <!-- ══ HEADER ══ -->
+    <HBox styleClass="header-bar" alignment="CENTER_LEFT" spacing="0">
+        <VBox spacing="2" HBox.hgrow="ALWAYS">
+            <Label text="⚡ VALORANT E-SPORTS TRACKER" styleClass="header-title"/>
+            <Label text="Tournament · Match Stats · Live Player Data" styleClass="header-sub"/>
+        </VBox>
+        <VBox alignment="CENTER_RIGHT">
+            <Label fx:id="dbStatusLabel" text="● Connecting..." styleClass="status-connecting"/>
+        </VBox>
+        <HBox.margin>
+            <Insets right="10"/>
+        </HBox.margin>
+    </HBox>
+
+    <!-- ══ TABS ══ -->
+    <TabPane fx:id="mainTabPane" styleClass="main-tab-pane" VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+
+        <!-- ── TAB 1: PLAYER SEARCH ── -->
+        <Tab text="🔍  Player Search">
+            <fx:include source="PlayerSearchTab.fxml" fx:id="playerSearchTab"/>
+        </Tab>
+
+        <!-- ── TAB 2: MATCH LOG ── -->
+        <Tab text="📋  Match Log">
+            <fx:include source="MatchLogTab.fxml" fx:id="matchLogTab"/>
+        </Tab>
+
+        <!-- ── TAB 3: LEADERBOARD ── -->
+        <Tab text="🏆  Leaderboard">
+            <fx:include source="LeaderboardTab.fxml" fx:id="leaderboardTab"/>
+        </Tab>
+
+    </TabPane>
+
+</VBox>
